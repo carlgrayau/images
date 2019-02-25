@@ -4,23 +4,32 @@
         Image Storage
         </a>
     <div class="right menu">
-        <a href="#" class="ui item" @click="login">Login</a>
+    <div v-if="isLoggedIn" class="horizontal">
+        <a class="item">Galleries</a>
+        <a class="item">Upload</a>
+        <a @click="logout" class="item">Logout</a>
+    </div>
+        <a v-else href="#" class="ui item" @click="login">Login</a>
     </div>
 
         </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'AppHeader',
+    computed: mapGetters(['isLoggedIn']),
     methods: {
-      ...mapActions(['login'])
+      ...mapActions(['login', 'logout'])
     }
 };
 </script>
 
-<style>
-
+<style scoped>
+.horizontal {
+    display: flex;
+    flex-direction: row;
+}
 </style>
